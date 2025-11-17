@@ -1,3 +1,4 @@
+import { UUID } from 'node:crypto';
 import { Specialization } from '../../specialization/entities/specialization.entity';
 import { User } from '../../user/entities/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
@@ -5,7 +6,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne
 @Entity()
 export class Doctor {
     @PrimaryGeneratedColumn('uuid')
-    id:string;
+    id: UUID;
 
     @OneToOne(() => User, user => user.doctor, {
         onDelete: 'CASCADE',
@@ -38,9 +39,6 @@ export class Doctor {
 
     @Column()
     telemedicine_fee: number;
-
-    @Column({ default: false })
-    is_verified: boolean;
 
     @Column({ default: 0 })
     average_rating: number;

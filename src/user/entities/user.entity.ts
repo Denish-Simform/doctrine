@@ -4,11 +4,12 @@ import UserRole from '../../Enum/UserRole';
 import { Patient } from '../../patient/entities/patient.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
+import { UUID } from 'node:crypto';
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: UUID;
 
     @Column({name: 'first_name'})
     first_name: string;
@@ -34,6 +35,9 @@ export class User {
 
     @Column({ type: 'date' })
     date_of_birth: Date;
+
+    @Column({ default: false })
+    is_verified: boolean;
 
     @OneToOne(() => Doctor, doctor => doctor.user, { onUpdate: 'CASCADE', cascade: true, onDelete: 'CASCADE' })
     doctor: Doctor;

@@ -11,7 +11,7 @@ export class DoctorService {
     constructor(private doctorRepository: DoctorRepository, private specializationRepository: SpecializationRepository) {}
 
     async create(createDoctorDto: CreateDoctorDto, user: User) {
-        const specialization = await this.specializationRepository.findOneBy({ id: createDoctorDto.specialization_id.toString() });
+        const specialization = await this.specializationRepository.findOneBy({ id: createDoctorDto.specialization_id });
         if (!specialization) {
             throw new Error('Specialization not found');
         }

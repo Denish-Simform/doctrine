@@ -1,22 +1,23 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateDoctorDto } from './create-doctor.dto';
+import { UUID } from 'node:crypto';
 
 export class UpdateDoctorDto extends PartialType(CreateDoctorDto) {
-    specialization_id?: string;
+    // specialization_id?: UUID;
 
-    license_number?: string;
+    // license_number?: string;
 
-    years_of_experience?: number;
+    // years_of_experience?: number;
 
-    education?: string;
+    // education?: string;
 
-    consultation_fee?: number;
+    // consultation_fee?: number;
 
-    home_visit_fee?: number;
+    // home_visit_fee?: number;
 
-    telemedicine_fee?: number;
+    // telemedicine_fee?: number;
 
-    average_rating?: number;
+    // average_rating?: number;
 
-    review_count?: number;
+    // review_count?: number;
 }

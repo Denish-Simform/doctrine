@@ -7,21 +7,21 @@ import Gender from 'src/Enum/Gender';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
 
-    last_name?: string;
+    // last_name?: string;
 
-    email?: string;
+    // email?: string;
 
-    role?: UserRole;
+    // role?: UserRole;
 
-    password?: string;
+    // password?: string;
 
-    phone_number?: string;
+    // phone_number?: string;
 
-    gender? : Gender;
+    // gender? : Gender;
 
-    date_of_birth?: Date;
+    // date_of_birth?: Date;
 
-    patient_details?: UpdatePatientDto;
+    // patient_details?: UpdatePatientDto;
 
-    doctor_details?: UpdateDoctorDto;
+    // doctor_details?: UpdateDoctorDto;
 }

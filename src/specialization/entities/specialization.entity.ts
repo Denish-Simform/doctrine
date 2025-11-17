@@ -1,10 +1,11 @@
+import { UUID } from 'node:crypto';
 import { Doctor } from '../../doctor/entities/doctor.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Specialization {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: UUID;
 
     @Column({ unique: true })
     name: string;

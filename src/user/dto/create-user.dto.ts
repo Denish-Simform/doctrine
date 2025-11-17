@@ -55,7 +55,7 @@ export class CreateUserDto {
     @IsNotEmpty()
     date_of_birth: Date;
 
-    doctor_details?: CreateDoctorDto | any;
+    doctor_details?: CreateDoctorDto;
 
-    patient_details?: CreatePatientDto | any;
+    patient_details?: CreatePatientDto;
 }

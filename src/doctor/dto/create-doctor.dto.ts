@@ -1,11 +1,12 @@
 import { IsString, IsNotEmpty, IsUUID, IsNumber } from 'class-validator';
+import { UUID } from 'node:crypto';
 
 export class CreateDoctorDto {
     @IsUUID()
-    user_id?: string;
+    user_id?: UUID;
 
     @IsUUID()
-    specialization_id: string;
+    specialization_id: UUID;
 
     @IsString()
     @IsNotEmpty()

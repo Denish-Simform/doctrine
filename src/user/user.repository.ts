@@ -2,6 +2,7 @@ import { DataSource, Repository } from "typeorm";
 import { User } from "./entities/user.entity";
 import { Injectable } from "@nestjs/common";
 import { UUID } from "node:crypto";
+import UserRole from "src/Enum/UserRole";
 
 @Injectable()
 export class UserRepository {
@@ -49,5 +50,17 @@ export class UserRepository {
 
     async remove(id: UUID): Promise<void> {
         await this.userRepo.delete(id);
+    }
+
+    findOneBy(condition: Partial<User>): Promise<User | null> {
+        return this.userRepo.findOneBy(condition);
+    }
+
+    updateVerifiedEmail(id: UUID, isVerified: boolean): Promise<boolean> {
+        return this.userRepo.update(id, { is_verified: isVerified }).then(() => true).catch(() => false);
+    }
+
+    countAdminUsers(): Promise<number> {
+        return this.userRepo.count({ where: { role: UserRole.ADMIN } });
     }
 }

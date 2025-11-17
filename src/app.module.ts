@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { Module} from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppDataSource } from './data-source';
@@ -7,11 +8,22 @@ import { UserModule } from './user/user.module';
 import { DoctorModule } from './doctor/doctor.module';
 import { PatientModule } from './patient/patient.module';
 import { SpecializationModule } from './specialization/specialization.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/auth.guard';
+import { MailModule } from './mail/mail.module';
 
 @Module({
-    imports: [TypeOrmModule.forRoot(AppDataSource.options), UserModule, DoctorModule, PatientModule, SpecializationModule],
+    imports: [TypeOrmModule.forRoot(AppDataSource.options), UserModule, DoctorModule, PatientModule, SpecializationModule, ConfigModule.forRoot({
+        isGlobal: true,
+    }), AuthModule, MailModule],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService, 
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard
+        }
+    ],
 })
 
 export class AppModule { }

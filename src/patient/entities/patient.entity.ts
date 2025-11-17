@@ -1,10 +1,11 @@
+import { UUID } from 'node:crypto';
 import { User } from '../../user/entities/user.entity';
 import { Entity, OneToOne, Column, PrimaryGeneratedColumn, JoinColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Patient {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: UUID;
 
     @OneToOne(() => User, user => user.patient, {
         onDelete: 'CASCADE',
