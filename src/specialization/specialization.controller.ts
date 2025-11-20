@@ -2,7 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { SpecializationService } from './specialization.service';
 import { CreateSpecializationDto } from './dto/create-specialization.dto';
 import { UpdateSpecializationDto } from './dto/update-specialization.dto';
+import { Roles } from 'src/decorators/roles.decorator';
+import UserRole from 'src/Enum/UserRole';
+import { UUID } from 'node:crypto';
 
+
+@Roles(UserRole.ADMIN)
 @Controller('specialization')
 export class SpecializationController {
     constructor(private readonly specializationService: SpecializationService) { }
@@ -18,17 +23,17 @@ export class SpecializationController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.specializationService.findOne(+id);
+    findOne(@Param('id') id: UUID) {
+        return this.specializationService.findOne(id);
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateSpecializationDto: UpdateSpecializationDto) {
-        return this.specializationService.update(+id, updateSpecializationDto);
+    update(@Param('id') id: UUID, @Body() updateSpecializationDto: UpdateSpecializationDto) {
+        return this.specializationService.update(id, updateSpecializationDto);
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.specializationService.remove(+id);
+    remove(@Param('id') id: UUID) {
+        return this.specializationService.remove(id);
     }
 }

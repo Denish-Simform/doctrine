@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateSpecializationDto } from './dto/create-specialization.dto';
 import { UpdateSpecializationDto } from './dto/update-specialization.dto';
 import { SpecializationRepository } from './specialization.repository';
+import { UUID } from 'node:crypto';
 
 @Injectable()
 export class SpecializationService {
@@ -16,15 +17,15 @@ export class SpecializationService {
         return this.specializationRepository.findAll();
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} specialization`;
+    findOne(id: UUID) {
+        return this.specializationRepository.findOneBy({ id: id });
     }
 
-    update(id: number, updateSpecializationDto: UpdateSpecializationDto) {
-        return `This action updates a #${id} specialization`;
+    update(id: UUID, updateSpecializationDto: UpdateSpecializationDto) {
+        return this.specializationRepository.update(id, updateSpecializationDto);
     }
 
-    remove(id: number) {
-        return `This action removes a #${id} specialization`;
+    remove(id: UUID) {
+        return this.specializationRepository.remove(id);
     }
 }

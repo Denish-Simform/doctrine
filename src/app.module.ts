@@ -12,18 +12,26 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
 import { MailModule } from './mail/mail.module';
+import { MailQueueModule } from './mail-queue/mail-queue.module';
+import { MiddlewareConsumer } from '@nestjs/common/interfaces/middleware/middleware-consumer.interface';
+import { AwsService } from './aws/aws.service';
+import multer from 'multer';
 
 @Module({
     imports: [TypeOrmModule.forRoot(AppDataSource.options), UserModule, DoctorModule, PatientModule, SpecializationModule, ConfigModule.forRoot({
         isGlobal: true,
-    }), AuthModule, MailModule],
+    }), AuthModule, MailModule, MailQueueModule],
     controllers: [AppController],
     providers: [AppService, 
         {
             provide: APP_GUARD,
             useClass: AuthGuard
-        }
+        }, AwsService
     ],
 })
 
-export class AppModule { }
+export class AppModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(multer().single('file')).forRoutes('user/upload-image');
+    }
+ }

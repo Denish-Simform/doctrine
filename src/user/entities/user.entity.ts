@@ -5,6 +5,7 @@ import { Patient } from '../../patient/entities/patient.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { UUID } from 'node:crypto';
+import { UserImage } from './userImages.entity';
 
 @Entity()
 export class User {
@@ -44,6 +45,9 @@ export class User {
 
     @OneToOne(() => Patient, patient => patient.user, { onUpdate: 'CASCADE', cascade: true, onDelete: 'CASCADE' })
     patient: Patient;
+
+    @OneToOne(() => UserImage, image => image.user, { cascade: true })
+    image: UserImage;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at: Date;

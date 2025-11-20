@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 
 @Injectable()
 export class MailService {
     private transporter: nodemailer.Transporter;
 
-    constructor(private configService: ConfigService) {
+    constructor(private configService: ConfigService, @InjectQueue('mail') private mailQueue: Queue) {
         this.transporter = nodemailer.createTransport({
             host: this.configService.get<string>('MAIL_HOST'),
             port: this.configService.get<number>('MAIL_PORT'),
@@ -16,6 +18,10 @@ export class MailService {
                 pass: this.configService.get<string>('MAIL_PASS'),
             },
         });
+    }
+
+    addMailJob(email: string, token: string) {
+        this.mailQueue.add('sendVerificationEmail', { email, token });
     }
 
     async sendMail(to: string, subject: string, html: string) {

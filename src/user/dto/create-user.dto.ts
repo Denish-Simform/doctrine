@@ -14,24 +14,24 @@ import { CreateDoctorDto } from '../../doctor/dto/create-doctor.dto';
 import { CreatePatientDto } from '../../patient/dto/create-patient.dto';
 
 export class CreateUserDto {
-    @IsString()
     @IsNotEmpty()
+    @IsString()
     @MinLength(2)
     @MaxLength(30)
     first_name: string;
 
-    @IsString()
     @IsNotEmpty()
+    @IsString()
     @MinLength(2)
     @MaxLength(30)
     last_name: string;
 
-    @IsEmail()
     @IsNotEmpty()
+    @IsEmail()
     email: string;
 
-    @IsString()
     @IsNotEmpty()
+    @IsString()
     @MinLength(6)
     @MaxLength(50)
     @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/, {
@@ -39,20 +39,20 @@ export class CreateUserDto {
     })
     password: string;
 
-    @IsString()
     @IsNotEmpty()
+    @IsString()
     phone_number: string;
 
-    @IsEnum(UserRole)
     @IsNotEmpty()
+    @IsEnum(UserRole)
     role: UserRole;
 
+    @IsNotEmpty()
     @IsEnum(Gender)
-    @IsNotEmpty()   
     gender: Gender;
 
-    @IsDateString()
     @IsNotEmpty()
+    @IsDateString()
     date_of_birth: Date;
 
     doctor_details?: CreateDoctorDto;

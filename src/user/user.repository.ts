@@ -3,11 +3,13 @@ import { User } from "./entities/user.entity";
 import { Injectable } from "@nestjs/common";
 import { UUID } from "node:crypto";
 import UserRole from "src/Enum/UserRole";
+import { BaseRepository } from "src/common/BaseRepository";
 
 @Injectable()
-export class UserRepository {
+export class UserRepository extends BaseRepository {
     private userRepo: Repository<User>;
     constructor(dataSource: DataSource) {
+        super();
         this.userRepo = dataSource.getRepository(User);
     }
 
@@ -19,33 +21,27 @@ export class UserRepository {
 
     findAll(): Promise<User[]> {
         return this.userRepo.find({
-            relations: ['doctor', 'patient'],
+            relations: ['doctor', 'patient', 'image'],
         });
     }
 
     findOne(id: UUID): Promise<User | null> {
-        return this.userRepo.findOneBy({ id : id });
+        return this.userRepo.findOne({ 
+            where : {id : id},
+            relations: ['doctor', 'patient', 'image']
+        });
     }
 
-    async update(id: UUID, user: Partial<User>): Promise<User> {
-        let updatedUser = await this.userRepo.findOne({
+    async update(id: UUID, updateData: Partial<User>): Promise<User> {
+        let user = await this.userRepo.findOne({
                 where : { id : id } ,
-                relations: ['doctor', 'patient'],
+                relations: ['doctor', 'patient', 'image'],
             }
         );
-        if (!updatedUser) {
+        if (!user) {
             throw new Error('User not found');
         }
-        if (user.patient) {
-            for (const key in user.patient) {
-                updatedUser.patient[key] = user.patient[key];
-            }
-        } else if (user.doctor) {
-            for (const key in user.doctor) {
-                updatedUser.doctor[key] = user.doctor[key];
-            }
-        }
-        return this.userRepo.save(updatedUser);
+        return this.userRepo.save(this.updateEntityRecursively(user, updateData));
     }
 
     async remove(id: UUID): Promise<void> {
@@ -60,7 +56,20 @@ export class UserRepository {
         return this.userRepo.update(id, { is_verified: isVerified }).then(() => true).catch(() => false);
     }
 
-    countAdminUsers(): Promise<number> {
-        return this.userRepo.count({ where: { role: UserRole.ADMIN } });
+    findAllPaginated(page: number, limit: number): Promise<User[]> {
+        const skip = (page - 1) * limit;
+        return this.userRepo.find({
+            skip: skip,
+            take: limit,
+            relations: ['doctor', 'patient', 'image'],
+        });
+    }
+
+    countUsers(role?: UserRole): Promise<number> {
+        if (role) {
+            return this.userRepo.count({ where: { role: role } });
+        }
+
+        return this.userRepo.count();
     }
 }
