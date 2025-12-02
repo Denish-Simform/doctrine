@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { DoctorWeeklyScheduleService } from './doctor-weekly-schedule.service';
 import { CreateDoctorWeeklyScheduleDto } from './dto/create-doctor-weekly-schedule.dto';
 import { UpdateDoctorWeeklyScheduleDto } from './dto/update-doctor-weekly-schedule.dto';
@@ -11,21 +22,31 @@ import { UUID } from 'node:crypto';
 @Roles([UserRole.ADMIN, UserRole.DOCTOR])
 @UseInterceptors(ClassSerializerInterceptor)
 export class DoctorWeeklyScheduleController {
-    constructor(private readonly doctorWeeklyScheduleService: DoctorWeeklyScheduleService) { }
+  constructor(
+    private readonly doctorWeeklyScheduleService: DoctorWeeklyScheduleService,
+  ) {}
 
-    @Post()
-    @UseInterceptors(DoctorWeeklyScheduleInterceptor)
-    create(@Body() createDoctorWeeklyScheduleDto: CreateDoctorWeeklyScheduleDto) {
-        return this.doctorWeeklyScheduleService.create(createDoctorWeeklyScheduleDto);
-    }
+  @Post()
+  @UseInterceptors(DoctorWeeklyScheduleInterceptor)
+  create(@Body() createDoctorWeeklyScheduleDto: CreateDoctorWeeklyScheduleDto) {
+    return this.doctorWeeklyScheduleService.create(
+      createDoctorWeeklyScheduleDto,
+    );
+  }
 
-    @Get('doctor-schedule/:id')
-    findAllForDoctor(@Param('id') id: UUID) {
-        return this.doctorWeeklyScheduleService.findAllForDoctor(id);
-    }
+  @Get('doctor-schedule/:id')
+  findAllForDoctor(@Param('id') id: UUID) {
+    return this.doctorWeeklyScheduleService.findAllForDoctor(id);
+  }
 
-    @Post(':id')
-    update(@Param('id') id: UUID, @Body() updateDoctorWeeklyScheduleDto: UpdateDoctorWeeklyScheduleDto) {
-        return this.doctorWeeklyScheduleService.update(id, updateDoctorWeeklyScheduleDto);
-    }
+  @Post(':id')
+  update(
+    @Param('id') id: UUID,
+    @Body() updateDoctorWeeklyScheduleDto: UpdateDoctorWeeklyScheduleDto,
+  ) {
+    return this.doctorWeeklyScheduleService.update(
+      id,
+      updateDoctorWeeklyScheduleDto,
+    );
+  }
 }

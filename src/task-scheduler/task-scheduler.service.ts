@@ -4,10 +4,12 @@ import { GenerateDoctorAvailabilityTimeSlotsCommand } from 'src/command/generate
 
 @Injectable()
 export class TaskSchedulerService {
-    constructor(private readonly generateDoctorAvailabilityTimeSlotsCommand: GenerateDoctorAvailabilityTimeSlotsCommand) { }
+  constructor(
+    private readonly generateDoctorAvailabilityTimeSlotsCommand: GenerateDoctorAvailabilityTimeSlotsCommand,
+  ) {}
 
-    @Cron(CronExpression.EVERY_WEEKEND)
-    async handleGenerateDoctorAvailabilityTimeSlots() {
-        await this.generateDoctorAvailabilityTimeSlotsCommand.run([], {});
-    }
+  @Cron(CronExpression.EVERY_WEEKEND)
+  async handleGenerateDoctorAvailabilityTimeSlots() {
+    await this.generateDoctorAvailabilityTimeSlotsCommand.run([], {});
+  }
 }

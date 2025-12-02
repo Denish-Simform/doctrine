@@ -6,44 +6,47 @@ import { Queue } from 'bull';
 
 @Injectable()
 export class MailService {
-    private transporter: nodemailer.Transporter;
+  private transporter: nodemailer.Transporter;
 
-    constructor(private configService: ConfigService, @InjectQueue('mail') private mailQueue: Queue) {
-        this.transporter = nodemailer.createTransport({
-            host: this.configService.get<string>('MAIL_HOST'),
-            port: this.configService.get<number>('MAIL_PORT'),
-            secure: false,
-            auth: {
-                user: this.configService.get<string>('MAIL_USER'),
-                pass: this.configService.get<string>('MAIL_PASS'),
-            },
-        });
-    }
+  constructor(
+    private configService: ConfigService,
+    @InjectQueue('mail') private mailQueue: Queue,
+  ) {
+    this.transporter = nodemailer.createTransport({
+      host: this.configService.get<string>('MAIL_HOST'),
+      port: this.configService.get<number>('MAIL_PORT'),
+      secure: false,
+      auth: {
+        user: this.configService.get<string>('MAIL_USER'),
+        pass: this.configService.get<string>('MAIL_PASS'),
+      },
+    });
+  }
 
-    addMailJob(email: string, token: string) {
-        this.mailQueue.add('sendVerificationEmail', { email, token });
-    }
+  addMailJob(email: string, token: string) {
+    this.mailQueue.add('sendVerificationEmail', { email, token });
+  }
 
-    async sendMail(to: string, subject: string, html: string) {
-        const from = this.configService.get('MAIL_FROM');
+  async sendMail(to: string, subject: string, html: string) {
+    const from = this.configService.get('MAIL_FROM');
 
-        return this.transporter.sendMail({
-            from,
-            to,
-            subject,
-            html,
-        });
-    }
+    return this.transporter.sendMail({
+      from,
+      to,
+      subject,
+      html,
+    });
+  }
 
-    async sendVerificationEmail(email: string, token: string) {
-        const verifyUrl = `http://localhost:3000/auth/verify?token=${token}`;
+  async sendVerificationEmail(email: string, token: string) {
+    const verifyUrl = `http://localhost:3000/auth/verify?token=${token}`;
 
-        const html = `
+    const html = `
             <h1>Verify your email</h1>
             <p>Click the link below to verify your account:</p>
             <a href="${verifyUrl}">Verify Email</a>
         `;
 
-        return this.sendMail(email, 'Verify your email', html);
-    }
+    return this.sendMail(email, 'Verify your email', html);
+  }
 }
