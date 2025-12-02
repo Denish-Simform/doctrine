@@ -3,7 +3,8 @@ import { LoginDto } from './dto/login.dto';
 import { AuthService } from './auth.service';
 import { Public } from 'src/decorators/public.decorator';
 import { JwtService } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { Roles } from 'src/decorators/roles.decorator';
+import UserRole from 'src/Enum/UserRole';
 
 @Controller('auth')
 export class AuthController {
@@ -17,6 +18,7 @@ export class AuthController {
     }
 
     @Get('me')
+    @Roles([UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT])
     getProfile(@Request() req) {
         return req.user;
     }

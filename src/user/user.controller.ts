@@ -25,7 +25,7 @@ export class UserController {
         }
     }
 
-    @Roles(UserRole.ADMIN)
+    @Roles([UserRole.ADMIN])
     @Get()
     findAll(@Req() req) {
         if ('page' in req.query && 'limit' in req.query) {
@@ -47,7 +47,7 @@ export class UserController {
         return this.userService.update(id, updateUserDto);
     }
 
-    @Roles(UserRole.ADMIN)
+    @Roles([UserRole.ADMIN])
     @Delete(':id')
     remove(@Param('id') id: UUID) {
         return this.userService.remove(id);

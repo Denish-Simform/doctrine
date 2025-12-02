@@ -1,7 +1,8 @@
 import { UUID } from 'node:crypto';
 import { Specialization } from '../../specialization/entities/specialization.entity';
+import { DoctorWeeklySchedule } from '../../doctor-weekly-schedule/entities/doctor-weekly-schedule.entity';
 import { User } from '../../user/entities/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Doctor {
@@ -21,6 +22,9 @@ export class Doctor {
     })
     @JoinColumn({ name: 'specialization_id'})
     specialization: Specialization;
+
+    @OneToMany(() => DoctorWeeklySchedule, schedule => schedule.doctor, { cascade: true })
+    weeklySchedule: DoctorWeeklySchedule;
 
     @Column()
     license_number: string;

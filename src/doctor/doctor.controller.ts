@@ -2,15 +2,16 @@ import { Controller, Get, Body, Patch, Param, Delete, UseInterceptors } from '@n
 import { DoctorService } from './doctor.service';
 import { UUID } from 'node:crypto';
 import { DoctorResponseInterceptor } from 'src/doctor-response/doctor-response.interceptor';
-import { Public } from 'src/decorators/public.decorator';
+import { Roles } from 'src/decorators/roles.decorator';
+import UserRole from 'src/Enum/UserRole';
 
 @UseInterceptors(DoctorResponseInterceptor)
+@Roles([UserRole.ADMIN, UserRole.PATIENT])
 @Controller('doctor')
 export class DoctorController {
     constructor(private readonly doctorService: DoctorService) { }
 
     @Get()
-    @Public()
     findAll() {
         return this.doctorService.findAll();
     }

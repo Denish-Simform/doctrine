@@ -7,7 +7,7 @@ import UserRole from 'src/Enum/UserRole';
 import { UUID } from 'node:crypto';
 
 
-@Roles(UserRole.ADMIN)
+@Roles([UserRole.ADMIN])
 @Controller('specialization')
 export class SpecializationController {
     constructor(private readonly specializationService: SpecializationService) { }
