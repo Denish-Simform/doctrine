@@ -1,5 +1,5 @@
 export enum DoctorStatus {
-    AVAILABLE = 'available',
-    BOOKED = 'booked',
-    UNAVAILABLE = 'unavailable',
+  AVAILABLE = 'available',
+  BOOKED = 'booked',
+  UNAVAILABLE = 'unavailable',
 }

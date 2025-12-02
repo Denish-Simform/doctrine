@@ -23,35 +23,36 @@ import { TaskSchedulerService } from './task-scheduler/task-scheduler.service';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
-    imports: [TypeOrmModule.forRoot(AppDataSource.options), 
-        UserModule, 
-        DoctorModule, 
-        PatientModule, 
-        SpecializationModule, 
-        ConfigModule.forRoot({
-            isGlobal: true,
-        }), 
-        AuthModule, 
-        MailModule,
-        MailQueueModule,
-        DoctorWeeklyScheduleModule, 
-        DoctorTimeSlotModule, 
-        ScheduleModule.forRoot()
-    ],
-    controllers: [AppController],
-    providers: [AppService,
-        {
-            provide: APP_GUARD,
-            useClass: AuthGuard
-        }, 
-        AwsService,
-        GenerateDoctorAvailabilityTimeSlotsCommand,
-        TaskSchedulerService
-    ],
+  imports: [
+    TypeOrmModule.forRoot(AppDataSource.options),
+    UserModule,
+    DoctorModule,
+    PatientModule,
+    SpecializationModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    AuthModule,
+    MailModule,
+    MailQueueModule,
+    DoctorWeeklyScheduleModule,
+    DoctorTimeSlotModule,
+    ScheduleModule.forRoot(),
+  ],
+  controllers: [AppController],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    AwsService,
+    GenerateDoctorAvailabilityTimeSlotsCommand,
+    TaskSchedulerService,
+  ],
 })
-
 export class AppModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(multer().single('file')).forRoutes('user/upload-image');
-    }
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(multer().single('file')).forRoutes('user/upload-image');
+  }
 }
