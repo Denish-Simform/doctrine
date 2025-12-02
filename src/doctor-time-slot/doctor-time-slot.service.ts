@@ -66,9 +66,9 @@ export class DoctorTimeSlotService {
     /**
      * Persists multiple time slots to the database in bulk.
      *
-     * @param timeSlots - Array of time slot objects grouped by schedule UUID,
-     *                    each containing date, start_time, and end_time
-     * @returns Promise resolving to the created time slots
+     * @param timeSlots - Object mapping schedule IDs to arrays of time slot data,
+     *                    where each time slot contains date, start_time, and end_time
+     * @returns Promise resolving to an array of created DoctorTimeSlot entities
      */
     async createTimeSlotsForSchedule(timeSlots: Array<{UUID: Array<{ date: string; start_time: string; end_time: string }>}>): Promise<any> {
         return await this.doctorTimeSlotRepository.createBulk(timeSlots);
