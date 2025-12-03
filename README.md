@@ -57,6 +57,43 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## API Testing with Postman
+
+Postman collection and environment files are available in the `postman/` directory:
+
+- `Doctrine-API.postman_collection.json` - Contains all API endpoints
+- `Doctrine-Local.postman_environment.json` - Local environment configuration
+
+### Login Example
+
+To login and fetch an access token, use the following request:
+
+**Endpoint:** `POST /auth/login`
+
+**Request Body:**
+```json
+{
+    "email": "sarah.johnson@doctrine.com",
+    "password": "Doctor@456"
+}
+```
+
+**Response:**
+```json
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### Using with Postman MCP
+
+You can use the Postman collection with Postman MCP (Model Context Protocol) for AI-powered API testing:
+
+1. Import the collection from `postman/Doctrine-API.postman_collection.json`
+2. Import the environment from `postman/Doctrine-Local.postman_environment.json`
+3. Use the login endpoint to obtain an access token
+4. The access token will be returned in the response and can be used for authenticated requests
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
