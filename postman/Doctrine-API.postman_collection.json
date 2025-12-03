@@ -25,9 +25,7 @@
               "raw": "{\n    \"email\": \"{{userEmail}}\",\n    \"password\": \"{{userPassword}}\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/login",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "login"]
+              "raw": "{{baseUrl}}/auth/login"
             },
             "description": "Login endpoint to authenticate users and receive an access token.\n\nUse the userEmail and userPassword environment variables to provide credentials."
           },
@@ -51,9 +49,7 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/me",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "me"]
+              "raw": "{{baseUrl}}/auth/me"
             },
             "description": "Get the authenticated user's profile. Requires a valid access token."
           },
@@ -65,15 +61,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/auth/verify?token={{verificationToken}}",
-              "host": ["{{baseUrl}}"],
-              "path": ["auth", "verify"],
-              "query": [
-                {
-                  "key": "token",
-                  "value": "{{verificationToken}}"
-                }
-              ]
+              "raw": "{{baseUrl}}/auth/verify?token={{verificationToken}}"
             },
             "description": "Verify user's email address using the verification token."
           },
