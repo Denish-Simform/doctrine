@@ -22,14 +22,14 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"email\": \"sarah.johnson@doctrine.com\",\n    \"password\": \"Doctor@456\"\n}"
+              "raw": "{\n    \"email\": \"{{userEmail}}\",\n    \"password\": \"{{userPassword}}\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/auth/login",
               "host": ["{{baseUrl}}"],
               "path": ["auth", "login"]
             },
-            "description": "Login endpoint to authenticate users and receive an access token.\n\nExample credentials:\n- Email: sarah.johnson@doctrine.com\n- Password: Doctor@456"
+            "description": "Login endpoint to authenticate users and receive an access token.\n\nUse the userEmail and userPassword environment variables to provide credentials."
           },
           "response": [
             {

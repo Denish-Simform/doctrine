@@ -73,8 +73,8 @@ To login and fetch an access token, use the following request:
 **Request Body:**
 ```json
 {
-    "email": "sarah.johnson@doctrine.com",
-    "password": "Doctor@456"
+    "email": "<your-email>",
+    "password": "<your-password>"
 }
 ```
 
@@ -91,8 +91,9 @@ You can use the Postman collection with Postman MCP (Model Context Protocol) for
 
 1. Import the collection from `postman/Doctrine-API.postman_collection.json`
 2. Import the environment from `postman/Doctrine-Local.postman_environment.json`
-3. Use the login endpoint to obtain an access token
-4. The access token will be returned in the response and can be used for authenticated requests
+3. Set the `userEmail` and `userPassword` environment variables with your credentials
+4. Use the login endpoint to obtain an access token
+5. The access token will be returned in the response and can be used for authenticated requests
 
 ## Deployment
 
