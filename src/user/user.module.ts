@@ -9,9 +9,9 @@ import { AwsService } from 'src/aws/aws.service';
 import { UserImageRepository } from './userImage.repository';
 
 @Module({
-    imports: [PatientModule, DoctorModule, MailModule],
-    controllers: [UserController],
-    providers: [UserService, UserRepository, AwsService, UserImageRepository],
-    exports: [UserService, UserRepository],
+  imports: [PatientModule, DoctorModule, MailModule],
+  controllers: [UserController],
+  providers: [UserService, UserRepository, AwsService, UserImageRepository],
+  exports: [UserService, UserRepository],
 })
-export class UserModule { }
+export class UserModule {}

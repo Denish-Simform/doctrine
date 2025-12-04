@@ -1,5 +1,5 @@
 export const jwtConstants = {
-    secret: 'Here is @akd form constansd.',
+  secret: 'Here is @akd form constansd.',
 };
 
 export const bcryptSaltRounds = 13;
@@ -11,11 +11,11 @@ export const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 export const doctorTimeSlotDurationMinutes = 30; // Default time slot duration in minutes
 
 export const weekDays = [
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-    'sunday'
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
 ];

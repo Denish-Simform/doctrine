@@ -8,7 +8,11 @@ import { DayOfTheWeekService } from 'src/common/DayOfTheWeekService';
 @Module({
   imports: [DoctorWeeklyScheduleModule],
   controllers: [DoctorTimeSlotController],
-  providers: [DoctorTimeSlotService, DayOfTheWeekService, DoctorTimeSlotRepository],
-  exports: [DoctorTimeSlotService]
+  providers: [
+    DoctorTimeSlotService,
+    DayOfTheWeekService,
+    DoctorTimeSlotRepository,
+  ],
+  exports: [DoctorTimeSlotService],
 })
-export class DoctorTimeSlotModule { }
+export class DoctorTimeSlotModule {}

@@ -3,18 +3,20 @@ import { DoctorWeeklyScheduleController } from './doctor-weekly-schedule.control
 import { DoctorWeeklyScheduleService } from './doctor-weekly-schedule.service';
 
 describe('DoctorWeeklyScheduleController', () => {
-    let controller: DoctorWeeklyScheduleController;
+  let controller: DoctorWeeklyScheduleController;
 
-    beforeEach(async () => {
-        const module: TestingModule = await Test.createTestingModule({
-            controllers: [DoctorWeeklyScheduleController],
-            providers: [DoctorWeeklyScheduleService],
-        }).compile();
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [DoctorWeeklyScheduleController],
+      providers: [DoctorWeeklyScheduleService],
+    }).compile();
 
-        controller = module.get<DoctorWeeklyScheduleController>(DoctorWeeklyScheduleController);
-    });
+    controller = module.get<DoctorWeeklyScheduleController>(
+      DoctorWeeklyScheduleController,
+    );
+  });
 
-    it('should be defined', () => {
-        expect(controller).toBeDefined();
-    });
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
 });

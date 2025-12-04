@@ -8,21 +8,26 @@ import { Doctor } from './entities/doctor.entity';
 
 @Injectable()
 export class DoctorService {
-    constructor(private doctorRepository: DoctorRepository, private specializationRepository: SpecializationRepository) {}
+  constructor(
+    private doctorRepository: DoctorRepository,
+    private specializationRepository: SpecializationRepository,
+  ) {}
 
-    async create(createDoctorDto: CreateDoctorDto, user: User) {
-        const specialization = await this.specializationRepository.findOneBy({ id: createDoctorDto.specialization_id });
-        if (!specialization) {
-            throw new Error('Specialization not found');
-        }
-        return this.doctorRepository.create(createDoctorDto, user, specialization);
+  async create(createDoctorDto: CreateDoctorDto, user: User) {
+    const specialization = await this.specializationRepository.findOneBy({
+      id: createDoctorDto.specialization_id,
+    });
+    if (!specialization) {
+      throw new Error('Specialization not found');
     }
+    return this.doctorRepository.create(createDoctorDto, user, specialization);
+  }
 
-    findAll() {
-        return this.doctorRepository.findAll();
-    }
+  findAll() {
+    return this.doctorRepository.findAll();
+  }
 
-    findOne(id: UUID) : Promise<Doctor | null> {
-        return this.doctorRepository.findOneBy({ id : id });
-    }
+  findOne(id: UUID): Promise<Doctor | null> {
+    return this.doctorRepository.findOneBy({ id: id });
+  }
 }

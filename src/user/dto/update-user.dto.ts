@@ -6,22 +6,13 @@ import UserRole from 'src/Enum/UserRole';
 import Gender from 'src/Enum/Gender';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
-
-    // last_name?: string;
-
-    // email?: string;
-
-    // role?: UserRole;
-
-    // password?: string;
-
-    // phone_number?: string;
-
-    // gender? : Gender;
-
-    // date_of_birth?: Date;
-
-    // patient_details?: UpdatePatientDto;
-
-    // doctor_details?: UpdateDoctorDto;
+  // last_name?: string;
+  // email?: string;
+  // role?: UserRole;
+  // password?: string;
+  // phone_number?: string;
+  // gender? : Gender;
+  // date_of_birth?: Date;
+  // patient_details?: UpdatePatientDto;
+  // doctor_details?: UpdateDoctorDto;
 }
