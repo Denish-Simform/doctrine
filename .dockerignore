@@ -1,0 +1,43 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+build
+
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.vscode
+*.sublime-workspace
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Test files
+coverage
+.nyc_output
+test
+*.spec.ts
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Misc
+.DS_Store
+*.md
+.prettierrc
+.eslintrc*
+eslint.config.mjs

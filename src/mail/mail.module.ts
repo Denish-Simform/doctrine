@@ -3,8 +3,8 @@ import { MailService } from './mail.service';
 import { MailQueueModule } from 'src/mail-queue/mail-queue.module';
 
 @Module({
-    providers: [MailService],
-    exports: [MailService],
-    imports: [MailQueueModule]
+  providers: [MailService],
+  exports: [MailService],
+  imports: [MailQueueModule],
 })
-export class MailModule { }
+export class MailModule {}

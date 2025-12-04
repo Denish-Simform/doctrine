@@ -4,8 +4,8 @@ import { SpecializationController } from './specialization.controller';
 import { SpecializationRepository } from './specialization.repository';
 
 @Module({
-    controllers: [SpecializationController],
-    providers: [SpecializationService, SpecializationRepository],
-    exports: [SpecializationService, SpecializationRepository],
+  controllers: [SpecializationController],
+  providers: [SpecializationService, SpecializationRepository],
+  exports: [SpecializationService, SpecializationRepository],
 })
-export class SpecializationModule { }
+export class SpecializationModule {}

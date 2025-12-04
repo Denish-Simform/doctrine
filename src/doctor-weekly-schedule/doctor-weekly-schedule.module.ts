@@ -5,9 +5,9 @@ import { DoctorWeeklyScheduleRepository } from './doctor-weekly-schedule.reposit
 import { DoctorModule } from 'src/doctor/doctor.module';
 
 @Module({
-    imports: [DoctorModule],
-    controllers: [DoctorWeeklyScheduleController],
-    providers: [DoctorWeeklyScheduleService, DoctorWeeklyScheduleRepository],
-    exports: [DoctorWeeklyScheduleRepository]
+  imports: [DoctorModule],
+  controllers: [DoctorWeeklyScheduleController],
+  providers: [DoctorWeeklyScheduleService, DoctorWeeklyScheduleRepository],
+  exports: [DoctorWeeklyScheduleRepository],
 })
-export class DoctorWeeklyScheduleModule { }
+export class DoctorWeeklyScheduleModule {}

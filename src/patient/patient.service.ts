@@ -8,17 +8,20 @@ import { Patient } from './entities/patient.entity';
 
 @Injectable()
 export class PatientService {
-    constructor(private patientRepository: PatientRepository) {}
+  constructor(private patientRepository: PatientRepository) {}
 
-    async create(createPatientDto: CreatePatientDto, user: User) : Promise<Patient> {
-        return await this.patientRepository.create(createPatientDto, user);
-    }
+  async create(
+    createPatientDto: CreatePatientDto,
+    user: User,
+  ): Promise<Patient> {
+    return await this.patientRepository.create(createPatientDto, user);
+  }
 
-    findAll() : Promise<Patient[] | null> {
-        return this.patientRepository.findAll();
-    }
+  findAll(): Promise<Patient[] | null> {
+    return this.patientRepository.findAll();
+  }
 
-    findOne(id: UUID): Promise<Patient | null> {
-        return this.patientRepository.findOneBy({ id : id });
-    }
+  findOne(id: UUID): Promise<Patient | null> {
+    return this.patientRepository.findOneBy({ id: id });
+  }
 }

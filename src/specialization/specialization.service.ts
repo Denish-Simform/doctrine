@@ -6,26 +6,27 @@ import { UUID } from 'node:crypto';
 
 @Injectable()
 export class SpecializationService {
+  constructor(
+    private readonly specializationRepository: SpecializationRepository,
+  ) {}
 
-    constructor(private readonly specializationRepository: SpecializationRepository) {}
+  create(createSpecializationDto: CreateSpecializationDto) {
+    return this.specializationRepository.create(createSpecializationDto);
+  }
 
-    create(createSpecializationDto: CreateSpecializationDto) {
-        return this.specializationRepository.create(createSpecializationDto);
-    }
+  findAll() {
+    return this.specializationRepository.findAll();
+  }
 
-    findAll() {
-        return this.specializationRepository.findAll();
-    }
+  findOne(id: UUID) {
+    return this.specializationRepository.findOneBy({ id: id });
+  }
 
-    findOne(id: UUID) {
-        return this.specializationRepository.findOneBy({ id: id });
-    }
+  update(id: UUID, updateSpecializationDto: UpdateSpecializationDto) {
+    return this.specializationRepository.update(id, updateSpecializationDto);
+  }
 
-    update(id: UUID, updateSpecializationDto: UpdateSpecializationDto) {
-        return this.specializationRepository.update(id, updateSpecializationDto);
-    }
-
-    remove(id: UUID) {
-        return this.specializationRepository.remove(id);
-    }
+  remove(id: UUID) {
+    return this.specializationRepository.remove(id);
+  }
 }
